@@ -1,0 +1,149 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+
+\title{Solutions for decentralized AI\\
+}
+
+\author{\IEEEauthorblockN{Sergi Hernández Burbano de Lara}
+\IEEEauthorblockA{\textit{Data Science Student} \\
+\textit{Universitat Pompeu Fabra}\\
+Barcelona, Spain \\
+sergi.hernandez01@estudiant.upf.edu}
+\and
+\IEEEauthorblockN{Sergi Vila Oriol}
+\IEEEauthorblockA{\textit{Telecoms Engineering Student} \\
+\textit{Universitat Pompeu Fabra}\\
+Barcelona, Spain \\
+sergi.vila01@estudiant.upf.edu}
+\and
+\IEEEauthorblockN{Edgar Espinós Murria}
+\IEEEauthorblockA{\textit{Telecoms Engineering Student} \\
+\textit{Universitat Pompeu Fabra}\\
+Barcelona, Spain \\
+edgar.espinos01@estudiant.upf.edu}
+}
+\maketitle
+
+\begin{abstract}
+As of 2023, AI models are being developed, trained, and deployed by private companies in a centralized way. In a world where AI is going to be an important source of power, it is vital to find ways to decentralize this power.
+
+In this paper, we explore solutions to decentralize AI models using Blockchain technologies so that anyone could afford to train an AI model and so that anyone could own a stake in them if they wish. We propose a consensus protocol that uses Deep Learning model training as Proof of Useful Work and a solution with Smart Contracts in Ethereum. We finally study their weaknesses and costs and propose an alternative solution using Layer-2 applications.
+\end{abstract}
+
+\begin{IEEEkeywords}
+deep learning, blockchain, consensus protocol, smart contract, decentralized AI model
+\end{IEEEkeywords}
+
+\section{Introduction}
+In recent years, AI models have become a relevant technology in our world: from chatbots to image generators, and many other impressive technologies to come.
+
+These technologies are usually developed by companies that take on the role of developing Deep Learning models, gathering the training data, and training the models with their own computing resources. In the future, it will be no surprise to also see governments taking a leading role in the development and use of deep learning technologies.
+
+With these two scenarios in mind, it is natural to fear the power that companies and governments can accumulate against citizens by owning these models. Many philosophers, journalists, writers, anthropologists, historians, lawyers, and economists have already pointed out how the tech industry is becoming highly centralized and monopolistic, and how this trend can lead to more economic inequality and authoritarian governments \cite{b1} \cite{b2} \cite{b3} \cite{b4}.
+
+Luckily, at the same time, another technology that seeks decentralization has been emerging: Blockchain. This technology started as a decentralized network of computers that maintained an append-only immutable ledger of transactions but has developed into a wider concept allowing even other kinds of decentralized applications.
+
+In this paper, we ask ourselves if the centralization of the AI industry can be mitigated through the convergence of Blockchain and Deep Learning.
+
+In particular, we would like a system where a developer designs a Deep Learning model and submits it for training at a negligible economical cost. The providers of computational power and data would be compensated for their work with an economic good in the form of a token or with the right of making queries to the trained model.
+
+\section{Our contribution}
+First, we propose a longest-chain type of consensus protocol that uses deep learning training as proof of useful work. We provide an impossibility result that shows why such a protocol (with the assumptions and properties we desire) would not be feasible in practice.
+
+We provide an alternative solution using smart contracts to train models and provide token-based incentives to the trainers and the data providers. We also show empirically that this alternative is very costly in terms of gas.
+
+Finally, we pose Layer-2 applications as a more realistic alternative to the decentralization of AI models.
+
+\section{Background, terminology and definitions}
+\subsection{Blockchain background}
+...
+Consensus protocols of the form of PoW revolve around the idea of miners competing to solve a problem that is hard to solve but easy to verify. Bitcoin's PoW uses the problem of breaking SHA-256 hashes as the problem that miners have to solve in order to be the leaders of a round.
+
+This method successfully achieves the goal of randomly selecting a miner according to its share of computational power in a permissionless network.
+
+\subsection{Deep Learning background}
+Deep Learning is a type of machine learning based on artificial neural networks in which multiple layers of processing are used to extract progressively higher-level features from data to learn patterns (definition from Oxford Languages).
+
+We use the term Deep Learning model to refer to a certain Deep Learning architecture with some parameters $W$ that have been trained with training data or are still to be trained. Model parameters are initialized at random and trained iteratively using some optimization algorithm like stochastic gradient descent.
+
+A model can be as simple as a linear regression with 2 parameters (the bias $w_0$ and the slope of the line $w_1$) or more complex like GPT-2, which has over 1.5B parameters\cite{b5}.
+
+The training of the model depends on the choice of some hyperparameters. These hyperparameters include the learning rate $\alpha$, the optimization algorithm, or the number and size of layers in the neural network.
+
+So training Deep Learning models is a game of finding the optimal parameters thanks to optimization algorithms, and finding the optimal hyperparameters through a process that involves part trial and error and part educated guesses.
+
+\section{Embedding decentralized AI in the consensus protocol}
+\subsection{Previous work}
+There have been many attempts to develop Proof of Useful Work protocols that use Deep Learning training as the hard problem to be solved by miners.
+
+\begin{itemize}
+\item Proof-of-Learning (2019) Felipe Bravo-Marquez and Martin Ugarte
+\item CoinAI (2019) 
+\item BlockML (2019)
+\item Proof-of-Deep-Learning (PoDL) (2019)
+\item Proof of Artificial Intelligence (PAI) (2020)
+\item DLBC (2020)
+\item Proof of Learning (PoLe) (2020)
+\end{itemize}
+
+
+\subsection{Protocol design sketch}
+The previous work shows impressive solutions to the problem of training a deep learning model using the computational power of miners of a blockchain network. Specially BlockML or PoLe.
+
+As the authors of BlockML cleverly point out: using randomly generated deep learning problems is not useful by construction. So we need to introduce a new entity to the game which we will call the (problem) suppliers.
+
+Nonetheless, both BlockML and PoLe require the problem suppliers to provide a reward for the miner. In other words, the reward that the miner wins for mining a block is not a newly-minted token just like Bitcoin miners get rewarded. The rewards they get are rewards paid by the suppliers.
+
+We would like a system that relies less on the economic power of the supplier.
+
+The difficulty parameter is the number of parameters of the model.
+
+\subsection{Impossibility result}
+\subsection{Experiment in Python}
+
+We will implement the protocol sketched earlier in Python and simulate a network of nodes running this protocol where one of them is Byzantine and executes the attack discussed above: performing the submitter and miner roles simultaneously in order to gain the newly-minted rewards with higher probability than the honest nodes.
+
+\section{Implementing decentralized AI in smart contracts}
+
+Having seen that it is impossible to have such a deep learning setting implemented in the consensus protocol of the blockchain, we ask ourselves if it would be feasible to have it implemented in smart contracts.
+
+\subsection{Previous work}
+\subsection{Solution design sketch}
+\subsection{Experiment in Solidity and Brownie}
+\subsection{Gas cost analysis}
+
+\section{Conclusions}
+
+
+We have seen that it is impossible to have a decentralized deep learning system with the properties we suggest implemented in the consensus protocol of the blockchain. We have also seen that the gas costs of implementing a deep learning training algorithm in a smart contract would be incredibly economically high.
+
+Therefore, we see that the only alternatives are:
+\begin{itemize}
+\item Relaxing the properties and assumptions so that we are able to implement decentralized AI in the consensus protocol (like in BlockML or PoLe).
+\item Keeping the properties and assumptions and use a smart contract solution but move to a Layer 2 setting that allows greater scalability and reduction of gas costs.
+\end{itemize}
+
+\begin{thebibliography}{00}
+
+\bibitem{b1} Peirano, M. (2019). El enemigo conoce el sistema / The Enemy Knows the System. DEBATE.
+
+\bibitem{b2} The Economist. (2023, June 10). Yuval Noah Harari argues that AI has hacked the operating system of human civilisation. The Economist. https://www.economist.com/by-invitation/2023/04/28/yuval-noah-harari-argues-that-ai-has-hacked-the-operating-system-of-human-civilisation.
+
+\bibitem{b3} euronews. (2019, May 14). A.I. is as threatening as climate change and nuclear war, says historian Yuval Noah Harari [Video]. https://www.euronews.com/2019/05/14/a-i-is-as-threatening-as-climate-change-and-nuclear-war-says-philosopher-yuval-noah-harari
+
+\bibitem{b4} Stoller, M., Miller, S., Teachout, Z. (2020, April 10). Addressing Facebook and Google’s harms through a regulated competition approach. American Economic Liberties Project. https://www.economicliberties.us/our-work/addressing-facebook-and-googles-harms-through-a-regulated-competition-approach/.
+
+\bibitem{b5} Radford, A., Wu, J., Child, R., Luan, D., Amodei, D., \& Sutskever, I. (2019). Language models are unsupervised multitask learners. OpenAI. https://d4mucfpksywv.cloudfront.net/better-language-models/language-models.pdf
+
+\end{thebibliography}
+
