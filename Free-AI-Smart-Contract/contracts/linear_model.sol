@@ -25,11 +25,11 @@ contract LinearModel {
         w1 = _w1*decimals;
     }
     
-    function step () public view returns (int, int){
+    function step() public view returns (int, int){
         return(alpha, (-2*(y[0]-full_predict(x[0], w0, w1))));
     }
 
-    function train () public {
+    function train() public {
         int new_w0 = 0;
         int new_w1 = 0;
         int local_w0 = w0;
@@ -59,12 +59,12 @@ contract LinearModel {
         return int(int(_w0 + int(_w1*_x))/decimals);
     }
     
-    function push(int _x, int _y) public {
+    function addData(int _x, int _y) public {
         x.push(_x);
         y.push(_y);
     }
 
-    function getData (uint256 i) external view returns(int, int){
+    function getData(uint256 i) external view returns(int, int){
         require(i<x.length);
         return (x[i], y[i]);
     }

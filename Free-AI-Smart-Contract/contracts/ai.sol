@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: UNKNOWN 
 pragma solidity ^0.8.0;
 
-contract Ai{
+contract DecentralizedAi{
 
     // variables
     string public name;
@@ -34,6 +34,14 @@ contract Ai{
 
     function predict() public {
 
+    }
+
+    function addData() public {
+
+    }
+
+    function getData() public {
+        
     }
 
 }

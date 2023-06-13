@@ -108,16 +108,31 @@ We would like a system that relies less on the economic power of the supplier.
 
 The difficulty parameter is the number of parameters of the model.
 
-\subsection{Impossibility result}
+\subsection{Impossibility proof sketch}
+
+Let $\Pi$ be a longest-chain consensus protocol under the permissionless setting assumption in which the leader of each round wins a fixed newly-minted reward and is selected as the node with higher performance in solving a user-proposed problem (like optimizing a deep learning model), such that these problems are submitted for free by non-authenticated users to a pool of problems and attempted to be solved by miners.
+
+Theorem: such a protocol cannot exist without preventing Byzantine nodes from gaining rewards with a higher probability than honest nodes, even with $f=1$.
+
+Let a network have 3 nodes where 2 nodes are honest and run $\Pi$, and the other node is Byzantine.
+
+Users can submit hard problems to the problem pool. Note that, since nodes and users are anonymous and unauthenticated, a player can be both a node and a user. Thus, the Byzantine player can submit to the pool a hard problem for which he already knows the solution. When the problem gets to be solved by all the nodes, the Byzantine node can provide the most optimal answer to the problem with higher probability than the other nodes because he had prior knowledge of the problem.
+
+At the same time, since problems are submitted at zero cost to the pool, players are not disincentivized to spam the pool with problems in which they have no real interest.
+
 \subsection{Experiment in Python}
 
-We will implement the protocol sketched earlier in Python and simulate a network of nodes running this protocol where one of them is Byzantine and executes the attack discussed above: performing the submitter and miner roles simultaneously in order to gain the newly-minted rewards with higher probability than the honest nodes.
+We will implement the protocol sketched earlier in Python and simulate a network of nodes running this protocol where one of them is Byzantine and executes the attack discussed above: performing the submitter and miner roles simultaneously and submitting pre-solved problems to the pool in order to gain the newly-minted rewards with higher probability than the honest nodes.
 
 \section{Implementing decentralized AI in smart contracts}
 
 Having seen that it is impossible to have such a deep learning setting implemented in the consensus protocol of the blockchain, we ask ourselves if it would be feasible to have it implemented in smart contracts.
 
 \subsection{Previous work}
+
+\begin{itemize}
+\item Microsoft's SUM project
+\end{itemize}
 \subsection{Solution design sketch}
 \subsection{Experiment in Solidity and Brownie}
 \subsection{Gas cost analysis}
@@ -146,4 +161,3 @@ Therefore, we see that the only alternatives are:
 \bibitem{b5} Radford, A., Wu, J., Child, R., Luan, D., Amodei, D., \& Sutskever, I. (2019). Language models are unsupervised multitask learners. OpenAI. https://d4mucfpksywv.cloudfront.net/better-language-models/language-models.pdf
 
 \end{thebibliography}
-
