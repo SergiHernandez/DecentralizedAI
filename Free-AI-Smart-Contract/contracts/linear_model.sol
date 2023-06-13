@@ -1,5 +1,4 @@
 // SPDX-License-Identifier: MIT 
-// CODE FROM: Github kidwai/LinearModel.sol
 pragma solidity ^0.8.0;
 
 contract LinearModel {
