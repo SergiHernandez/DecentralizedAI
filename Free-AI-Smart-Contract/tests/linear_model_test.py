@@ -16,7 +16,7 @@ def test():
     y = [70, 80, 40, 90, 20, 0, 40, 60, 90]
 
     for i in range(len(x)):
-        lm_contract.push(x[i], y[i], {"from": me})
+        lm_contract.addData(x[i], y[i], {"from": me})
 
     #for i in range(len(x)):
     #    print(lm_contract.getData(i, {"from": me}))
