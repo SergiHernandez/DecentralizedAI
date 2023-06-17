@@ -7,6 +7,15 @@
 \usepackage{graphicx}
 \usepackage{textcomp}
 \usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
@@ -51,11 +60,11 @@ These technologies are usually developed by companies that take on the role of d
 
 With these two scenarios in mind, it is natural to fear the power that companies and governments can accumulate against citizens by owning these models. Many philosophers, journalists, writers, anthropologists, historians, lawyers, and economists have already pointed out how the tech industry is becoming highly centralized and monopolistic, and how this trend can lead to more economic inequality and authoritarian governments \cite{b1} \cite{b2} \cite{b3} \cite{b4}.
 
-Luckily, at the same time, another technology that seeks decentralization has been emerging: Blockchain. This technology started as a decentralized network of computers that maintained an append-only immutable ledger of transactions but has developed into a wider concept allowing even other kinds of decentralized applications.
+Luckily, at the same time, another technology that seeks decentralization has been emerging: Blockchain. This technology started as a decentralized network of computers that maintained an append-only immutable ledger of transactions \cite{b6} but has developed into a wider concept allowing even other kinds of decentralized applications.
 
 In this paper, we ask ourselves if the centralization of the AI industry can be mitigated through the convergence of Blockchain and Deep Learning.
 
-In particular, we would like a system where a developer designs a Deep Learning model and submits it for training at a negligible economical cost. The providers of computational power and data would be compensated for their work with an economic good in the form of a token or with the right of making queries to the trained model.
+In particular, we would like a system where a developer designs a Deep Learning model and submits it for training at a negligible economical cost. The providers of computational power and data would be compensated for their work with an economic good in the form of a crypto-token that could be exchanged by other crypto-assets or could give the owner the right of making queries to the trained AI model.
 
 \section{Our contribution}
 First, we propose a longest-chain type of consensus protocol that uses deep learning training as proof of useful work. We provide an impossibility result that shows why such a protocol (with the assumptions and properties we desire) would not be feasible in practice.
@@ -66,10 +75,13 @@ Finally, we pose Layer-2 applications as a more realistic alternative to the dec
 
 \section{Background, terminology and definitions}
 \subsection{Blockchain background}
-...
-Consensus protocols of the form of PoW revolve around the idea of miners competing to solve a problem that is hard to solve but easy to verify. Bitcoin's PoW uses the problem of breaking SHA-256 hashes as the problem that miners have to solve in order to be the leaders of a round.
+Blockchains are a solution to the State Machine Replication (SMR) problem. In Blockchain networks, different nodes try to reach a consensus as to what is the true state of the system (whether it is a set of transactions, balances, variable values, or, related to this paper, the most optimal parameters of a Deep Learning model) even in the presence of Byzantine nodes.
+
+Consensus protocols of the form of Proof of Work revolve around the idea of miners competing to solve a problem that is hard to solve but easy to verify. Bitcoin's PoW uses the problem of breaking SHA-256 hashes as the problem that miners have to solve in order to be the leaders of a round.
 
 This method successfully achieves the goal of randomly selecting a miner according to its share of computational power in a permissionless network.
+
+Another concept in the world of Blockchains is Smart Contracts. Smart Contracts are code deployed in the Blockchain that can be executed by anyone. Thanks to them being in the Blockchain, no one can restrict access to their functions and no one can manipulate its output.
 
 \subsection{Deep Learning background}
 Deep Learning is a type of machine learning based on artificial neural networks in which multiple layers of processing are used to extract progressively higher-level features from data to learn patterns (definition from Oxford Languages).
@@ -78,63 +90,69 @@ We use the term Deep Learning model to refer to a certain Deep Learning architec
 
 A model can be as simple as a linear regression with 2 parameters (the bias $w_0$ and the slope of the line $w_1$) or more complex like GPT-2, which has over 1.5B parameters\cite{b5}.
 
-The training of the model depends on the choice of some hyperparameters. These hyperparameters include the learning rate $\alpha$, the optimization algorithm, or the number and size of layers in the neural network.
+The training of the model depends on the choice of some hyperparameters. These hyperparameters include the learning rate $\alpha$, the optimization algorithm, or the number and size of layers in the neural network. These can influence both the results and the duration of the training.
 
-So training Deep Learning models is a game of finding the optimal parameters thanks to optimization algorithms, and finding the optimal hyperparameters through a process that involves part trial and error and part educated guesses.
+So training Deep Learning models is a game of finding the optimal parameters thanks to optimization algorithms, and finding the optimal hyperparameters through a process that involves part trial and error and part educated guesses. Moreover, even if there are algorithms that can find local minima like gradient descent, algorithms that find global optimum are unknown yet algorithms that find the global minimum are unknown yet.
 
 \section{Embedding decentralized AI in the consensus protocol}
 \subsection{Previous work}
 There have been many attempts to develop Proof of Useful Work protocols that use Deep Learning training as the hard problem to be solved by miners.
 
 \begin{itemize}
-\item Proof-of-Learning (2019) Felipe Bravo-Marquez and Martin Ugarte
-\item CoinAI (2019) 
-\item BlockML (2019)
-\item Proof-of-Deep-Learning (PoDL) (2019)
-\item Proof of Artificial Intelligence (PAI) (2020)
-\item DLBC (2020)
-\item Proof of Learning (PoLe) (2020)
+\item In Proof-of-Learning (2019) \cite{}, the authors propose a consensus protocol where "Suppliers" publish machine learning tasks that are solved by "Trainers". The solutions provided by "Trainers" are evaluated by "Validators" that choose the winning node and add the next block to the Blockchain. An unaddressed issue in this paper is how to avoid "Trainers" to simultaneously act as "Validators" and rank their own solutions as the best.
+\item The authors of Coin.AI (2019) \cite{} propose using the hash of the previous blocks to determine the hyperparameters used by miners to train the models to ensure the immutability of the Blockchain. They also propose a parallel Proof of Storage distributed system to incentivize nodes to store the models after training. The winner is the first miner that achieves a certain quality threshold. So there is no "Validator" ranking the solutions.
+\item BlockML (2019) \cite{} also proposes having "Supplier" and "Miner" roles. In this case, miners themselves collectively rank the solutions proposed by other miners.
+\item In Proof-of-Deep-Learning (2019) \cite{}, they only allow one problem submitter that should be honest (they call it "model requester"). They split each round in two phases: the first in which miners train the model and commit to it by publishing it on the Blockchain, and a second phase in which they reveal it to other nodes for them to rank them and choose a winner.
+\item The Proof of Artificial Intelligence (PAI) (2020) \cite{} network is composed of many entities: problem submitters (called "Clients"), "Miners", "Supervisors", "Evaluators", and "Verifiers".
+\item More recent work such as DLBC (2020)\cite{}, Proof of Learning (PoLe) (2020)\cite{}, or CrowdMine (2022)\cite{} propose very similar protocols to the ones explained before.
+
 \end{itemize}
 
+As the authors of BlockML cleverly point out, using randomly generated deep learning problems is not useful by construction. So we need to introduce a new entity to the game: problem suppliers.
 
-\subsection{Protocol design sketch}
-The previous work shows impressive solutions to the problem of training a deep learning model using the computational power of miners of a blockchain network. Specially BlockML or PoLe.
+Except for Proof-of-Deep-Learning (2019), where they assumed a single supplier that should be honest, all the other suggested protocols require problem suppliers to provide a reward for the winning miner.
 
-As the authors of BlockML cleverly point out: using randomly generated deep learning problems is not useful by construction. So we need to introduce a new entity to the game which we will call the (problem) suppliers.
-
-Nonetheless, both BlockML and PoLe require the problem suppliers to provide a reward for the miner. In other words, the reward that the miner wins for mining a block is not a newly-minted token just like Bitcoin miners get rewarded. The rewards they get are rewards paid by the suppliers.
-
-We would like a system that relies less on the economic power of the supplier.
-
-The difficulty parameter is the number of parameters of the model.
+We ask ourselves if this is a necessary requirement to avoid attacks.
 
 \subsection{Impossibility proof sketch}
 
-Let $\Pi$ be a longest-chain consensus protocol under the permissionless setting assumption in which the leader of each round wins a fixed newly-minted reward and is selected as the node with higher performance in solving a user-proposed problem (like optimizing a deep learning model), such that these problems are submitted for free by non-authenticated users to a pool of problems and attempted to be solved by miners.
+Let $\Pi$ be a consensus protocol under the permissionless setting assumption in which the leader of each round wins a fixed newly-minted reward and is selected as the node with higher performance in solving a user-proposed problem (like optimizing a deep learning model), such that these problems are submitted for free by non-authenticated users to a pool of problems and attempted to be solved by miners.
 
 Theorem: such a protocol cannot exist without preventing Byzantine nodes from gaining rewards with a higher probability than honest nodes, even with $f=1$.
 
 Let a network have 3 nodes where 2 nodes are honest and run $\Pi$, and the other node is Byzantine.
 
-Users can submit hard problems to the problem pool. Note that, since nodes and users are anonymous and unauthenticated, a player can be both a node and a user. Thus, the Byzantine player can submit to the pool a hard problem for which he already knows the solution. When the problem gets to be solved by all the nodes, the Byzantine node can provide the most optimal answer to the problem with higher probability than the other nodes because he had prior knowledge of the problem.
+If all nodes were honest, at round $t$, nodes would try to solve the $t$'th problem. Each node would solve it with random degrees of success, making the choice of the leader of the round effectively random.
+
+But, since nodes and users are anonymous and unauthenticated, a player can be both a node and a user. Thus, the Byzantine player can submit to the pool a hard problem for which he already knows the solution. When the problem gets to be solved by all the nodes, the Byzantine node can provide the most optimal answer to the problem with higher probability than the other nodes because he had prior knowledge of the problem. So nodes can manipulate their probability of being chosen as the leaders.
 
 At the same time, since problems are submitted at zero cost to the pool, players are not disincentivized to spam the pool with problems in which they have no real interest.
 
 \subsection{Experiment in Python}
 
-We will implement the protocol sketched earlier in Python and simulate a network of nodes running this protocol where one of them is Byzantine and executes the attack discussed above: performing the submitter and miner roles simultaneously and submitting pre-solved problems to the pool in order to gain the newly-minted rewards with higher probability than the honest nodes.
+We will implement our own Deep Learning consensus protocol in Python and simulate a network of nodes running this protocol where one of them is Byzantine and executes the attack discussed above: performing the submitter and miner roles simultaneously and submitting pre-solved problems to the pool in order to gain the newly-minted rewards with higher probability than the honest nodes.
+
+
 
 \section{Implementing decentralized AI in smart contracts}
 
-Having seen that it is impossible to have such a deep learning setting implemented in the consensus protocol of the blockchain, we ask ourselves if it would be feasible to have it implemented in smart contracts.
+Having seen that it is impossible to have such a deep learning setting implemented in the consensus protocol of the Blockchain, we ask ourselves if it would be feasible to have it implemented in smart contracts.
 
 \subsection{Previous work}
 
 \begin{itemize}
-\item Microsoft's SUM project
+\item Galaxy Learning (2019)\cite{} is the first attempt known to us to decentralize data storage and AI model training at the same time. They also propose incentives to data providers as a way for individuals to leverage their power against companies or institutions that regularly make use of their data. For the training mechanism, they base it on the concept of federated learning.
+\item The Microsoft's SUM project (2019)\cite{} also proposes a smart-contract-based framework for sharing and improving machine learning models. They define a way to incentivize users to provide more training data and punish wrong data submissions at the same time.
+\item In Incentivized Decentralized Machine Learning (2023)\cite{} and BRAIN (2023)\cite{}, the training is done by trainers off-chain and they then propose updates using a commit-reveal mechanism. The smart contract then scores and rewards the updates that are most optimal.
 \end{itemize}
-\subsection{Solution design sketch}
+
 \subsection{Experiment in Solidity and Brownie}
+We wanted to test how expensive it would be to train a simple model like a linear regression model in a smart contract.
+
+We store the training data in the smart contract in two arrays $x$ and $y$, and implement a function ``train()'' that runs stochastic gradient descent to update the values of the parameters $w_0$ and $w_1$.
+
+The code can be found in GitHub: \url{https://github.com/SergiHernandez/DecentralizedAI}
+
 \subsection{Gas cost analysis}
 
 \section{Conclusions}
@@ -159,5 +177,7 @@ Therefore, we see that the only alternatives are:
 \bibitem{b4} Stoller, M., Miller, S., Teachout, Z. (2020, April 10). Addressing Facebook and Google’s harms through a regulated competition approach. American Economic Liberties Project. https://www.economicliberties.us/our-work/addressing-facebook-and-googles-harms-through-a-regulated-competition-approach/.
 
 \bibitem{b5} Radford, A., Wu, J., Child, R., Luan, D., Amodei, D., \& Sutskever, I. (2019). Language models are unsupervised multitask learners. OpenAI. https://d4mucfpksywv.cloudfront.net/better-language-models/language-models.pdf
+
+\bibitem{b6} Nakamoto, S. (2008) Bitcoin: A Peer-to-Peer Electronic Cash System. https://bitcoin.org/bitcoin.pdf
 
 \end{thebibliography}
