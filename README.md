@@ -1,6 +1,6 @@
 Sergi Hernández Burbano de Lara - sergi.hernandez01@estudiant.upf.edu
 
-Sergi Vila Oriol - sergi.vila01@estudiant.upf.edu
+Sergi Vila Oriol - sergi.vila02@estudiant.upf.edu
 
 Edgar Espinós Murria - edgar.espinos01@estudiant.upf.edu
 
