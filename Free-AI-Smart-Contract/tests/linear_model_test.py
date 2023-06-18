@@ -16,13 +16,16 @@ def test():
     y = [70, 80, 40, 90, 20, 0, 40, 60, 90]
 
     web3_lm = web3.eth.contract(address=lm_contract.address, abi=lm_contract.abi)
-    estimated_gas = 0
+
+    print("Cost of calling addData() once", web3_lm.functions.addData(20, 30).estimate_gas())
+
+    total_estimated_gas = 0
 
     for i in range(len(x)):
-        estimated_gas += web3_lm.functions.addData(x[i], y[i]).estimate_gas()
+        total_estimated_gas += web3_lm.functions.addData(x[i], y[i]).estimate_gas()
         lm_contract.addData(x[i], y[i], {"from": me})
 
-    print(f"Est. Gas after adding data:  {estimated_gas}")
+    print(f"Est. Gas after adding data:  {total_estimated_gas}")
     print("")
     
     #for i in range(len(x)):
@@ -30,20 +33,18 @@ def test():
     
     lm_contract.initParams(10, 2)
 
-    estimated_gas_single_train = web3_lm.functions.train().estimate_gas()
-    print(f"Est. Gas after adding data:  {estimated_gas_single_train}")
+    print("Cost of calling train() once", web3_lm.functions.train().estimate_gas())
 
     for i in range(epochs):
-        estimated_gas += web3_lm.functions.train().estimate_gas()
+        total_estimated_gas += web3_lm.functions.train().estimate_gas()
         tx = lm_contract.train({"from": me})
         if i%200 == 0:
-            print(tx)
+            #print(tx.gas_used)
             print("Epoch", i)
             params = lm_contract.getParams({"from": me}) # no fa falta el from me
             print(params)
     
-    print(f"Est. Gas after adding data and training:  {estimated_gas}")
-    print("")
+    print(f"Est. Gas after adding data and training:  {total_estimated_gas}")
 
     print("W0 =", params[0]/decimals)
     print("W1 =", params[1]/decimals)
