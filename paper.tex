@@ -24,19 +24,19 @@
 }
 
 \author{\IEEEauthorblockN{Sergi Hernández Burbano de Lara}
-\IEEEauthorblockA{\textit{Data Science Student} \\
+\IEEEauthorblockA{\textit{Data science student} \\
 \textit{Universitat Pompeu Fabra}\\
 Barcelona, Spain \\
 sergi.hernandez01@estudiant.upf.edu}
 \and
 \IEEEauthorblockN{Sergi Vila Oriol}
-\IEEEauthorblockA{\textit{Telecoms Engineering Student} \\
+\IEEEauthorblockA{\textit{Telecommunications student} \\
 \textit{Universitat Pompeu Fabra}\\
 Barcelona, Spain \\
-sergi.vila01@estudiant.upf.edu}
+sergi.vila02@estudiant.upf.edu}
 \and
 \IEEEauthorblockN{Edgar Espinós Murria}
-\IEEEauthorblockA{\textit{Telecoms Engineering Student} \\
+\IEEEauthorblockA{\textit{Telecommunications student} \\
 \textit{Universitat Pompeu Fabra}\\
 Barcelona, Spain \\
 edgar.espinos01@estudiant.upf.edu}
@@ -44,7 +44,7 @@ edgar.espinos01@estudiant.upf.edu}
 \maketitle
 
 \begin{abstract}
-As of 2023, AI models are being developed, trained, and deployed by private companies in a centralized way. In a world where AI is going to be an important source of power, it is vital to find ways to decentralize this power.
+As of 2023, Artificial Intelligence (AI) models are being developed, trained, and deployed by private companies in a centralized way. In a world where AI is going to be an important source of power, it is vital to find ways to decentralize this power.
 
 In this paper, we explore solutions to decentralize AI models using Blockchain technologies so that anyone could afford to train an AI model and so that anyone could own a stake in them if they wish. We propose a consensus protocol that uses Deep Learning model training as Proof of Useful Work and a solution with Smart Contracts in Ethereum. We finally study their weaknesses and costs and propose an alternative solution using Layer-2 applications.
 \end{abstract}
@@ -64,10 +64,10 @@ Luckily, at the same time, another technology that seeks decentralization has be
 
 In this paper, we ask ourselves if the centralization of the AI industry can be mitigated through the convergence of Blockchain and Deep Learning.
 
-In particular, we would like a system where a developer designs a Deep Learning model and submits it for training at a negligible economical cost. The providers of computational power and data would be compensated for their work with an economic good in the form of a crypto-token that could be exchanged by other crypto-assets or could give the owner the right of making queries to the trained AI model.
+In particular, we would like a system where a developer designs a Deep Learning model and submits it for training at a negligible economical cost. The providers of computational power and data could be compensated for their work with an economic good in the form of a crypto-token that could be exchanged by other crypto-assets or could give the owner the right of making queries to the trained AI model.
 
 \section{Our contribution}
-First, we propose a longest-chain type of consensus protocol that uses deep learning training as proof of useful work. We provide an impossibility result that shows why such a protocol (with the assumptions and properties we desire) would not be feasible in practice.
+First, we propose a consensus protocol that uses Deep Learning training as Proof of Useful Work. We provide an impossibility result that shows why such a protocol (with the assumptions and properties we desire) would not be feasible in practice.
 
 We provide an alternative solution using smart contracts to train models and provide token-based incentives to the trainers and the data providers. We also show empirically that this alternative is very costly in terms of gas.
 
@@ -100,8 +100,8 @@ There have been many attempts to develop Proof of Useful Work protocols that use
 
 \begin{itemize}
 \item In Proof-of-Learning (2019) \cite{b7}, the authors propose a consensus protocol where ``Suppliers" publish machine learning tasks that are solved by ``Trainers". The solutions provided by ``Trainers" are evaluated by ``Validators" that choose the winning node and add the next block to the Blockchain. An unaddressed issue in this paper is how to avoid ``Trainers" to simultaneously act as ``Validators" and rank their own solutions as the best.
-\item The authors of Coin.AI (2019) \cite{b8} propose using the hash of the previous blocks to determine the hyperparameters used by miners to train the models to ensure the immutability of the Blockchain. They also propose a parallel Proof of Storage distributed system to incentivize nodes to store the models after training. The winner is the first miner that achieves a certain quality threshold. So there is no ``Validator" ranking the solutions.
-\item BlockML (2019) \cite{b9} also proposes having ``Supplier" and ``Miner" roles. In this case, miners themselves collectively rank the solutions proposed by other miners, but they do not provide a solution to prevent ``Miners" from stealing each other solutions. They split each round into a training phase and an evaluation phase.
+\item The authors of Coin.AI (2019) \cite{b8} propose using the hash of the previous blocks to determine the hyperparameters used by miners to train the models to ensure the immutability of the Blockchain. They also propose a Proof of Storage distributed system to incentivize nodes to store the models after training. The winner is the first miner that achieves a certain quality threshold. So there is no ``Validator" ranking the solutions.
+\item BlockML (2019) \cite{b9} also proposes having ``Supplier" and ``Miner" roles. In this case, miners themselves collectively rank the solutions proposed by other miners, but the authors do not provide a solution to prevent ``Miners" from stealing each other solutions. They split each round into a training phase and an evaluation phase.
 \item In Proof-of-Deep-Learning (2019) \cite{b10}, they only allow one problem submitter that should be honest (they call it ``model requester"). They also split each round into two phases: the first in which miners train the model and commit to it by publishing it on the Blockchain, and a second phase in which they reveal it to other nodes for them to rank them and choose a winner.
 \item The Proof of Artificial Intelligence (PAI) (2020) \cite{b11} network is composed of many entities: problem submitters (called "Clients"), "Miners" that perform the training, "Supervisors", "Evaluators" that evaluate the trained models, and "Verifiers". In this case, each round is splitted in four: registration, initialization, training and finalization.
 \item More recent work such as DLBC (2020)\cite{b12}, Proof of Learning (PoLe) (2020)\cite{b13}, or CrowdMine (2022)\cite{b14} propose very similar protocols to the ones explained before.
@@ -110,7 +110,7 @@ There have been many attempts to develop Proof of Useful Work protocols that use
 
 As the authors of BlockML cleverly point out, using randomly generated Deep Learning problems is not useful by construction. So we need to introduce a new entity to the game: problem suppliers.
 
-Except for Proof-of-Deep-Learning (2019), where they assumed a single supplier that should be honest, all the other suggested protocols require problem suppliers to provide a reward for the winning miner. The authors of CrowdMine even propose burning part of the rewards instead of giving it in full to the winner.
+Except for Proof-of-Deep-Learning (2019), where they assumed a single supplier that should be honest, all the other suggested protocols require problem suppliers to provide a reward for the winning miner. The authors of CrowdMine even propose burning part of the rewards instead of giving them in full to the winner.
 
 We ask ourselves if this is a necessary requirement to avoid attacks from dishonest suppliers.
 
@@ -122,9 +122,11 @@ Theorem: such a protocol cannot exist without preventing Byzantine nodes from ga
 
 Let a network have 3 nodes where 2 nodes are honest and run $\Pi$, and the other node is Byzantine.
 
-If all nodes were honest, at round $t$, nodes would try to solve the $t$'th problem. Each node would solve it with random degrees of success, making the choice of the leader of the round effectively random.
+If all nodes were honest, at round $t$, they would try to solve the $t$'th problem. Each node would solve it with random degrees of success, making the choice of the leader of the round effectively random.
 
 But, since nodes and users are anonymous and unauthenticated, a player can be both a node and a user. Thus, the Byzantine player can submit to the pool a hard problem for which he already knows the solution. When the problem gets to be solved by all the nodes, the Byzantine node can provide the most optimal answer to the problem with higher probability than the other nodes because he had prior knowledge of the problem. So dishonest nodes can manipulate their probability of being chosen as the leaders.
+
+We arrive at a contradiction, so we conclude that a protocol like $\Pi$ cannot exist without preventing nodes from manipulating their probability of winning rewards. 
 
 At the same time, since problems are submitted at zero cost to the pool, players are not disincentivized to spam the pool with problems in which they have no real interest.
 
@@ -147,30 +149,30 @@ The protocol runs for sequential rounds at the end of which all honest nodes sho
     \item ``Training phase'', in which:
     \begin{enumerate}
         \item the submitter broadcasts a training dataset $\{\mathcal X_\text{train},\mathcal Y_\text{train}\}$ to all miners;
-        \item miners train their models $\{f,W\}$ using the training data;
-        \item miners have to commit to their final model $\{f,W\}$ by sending a hash of it to the submitter before a timeout.
+        \item miners train their models $\{f,W\}^{(i)}$ using the training data, where $i$ denotes the $i$'th miner;
+        \item miners have to commit to their final model $\{f,W\}^{(i)}$ by sending a hash $h^{(i)}$ of it to the submitter before a timeout.
     \end{enumerate}
     \item ``Evaluation phase'', in which:
     \begin{enumerate}
         \item the submitter broadcasts the test input $\mathcal X_\text{test}$ to all miners;
-        \item miners compute their estimates for the test output using their model $f(x_{test}|W)=\hat y_{test}$;
-        \item miners send their estimates $\hat{\mathcal Y}_{\text{test}}$ to the submitter;
-        \item the submitter computes the accuracy of the model of each miner by comparing their estimates $\hat{\mathcal Y}_{\text{test}}$ with the real test dataset $\mathcal Y_{\text{test}}$.
+        \item miners compute their estimates for the test output using their model $f^{(i)}(x_{\text{test}}|W^{(i)})=\hat y_{\text{test}}^{(i)}$;
+        \item miners send their estimates $\hat{\mathcal Y}_{\text{test}}^{(i)}$ to the submitter (this serves as a Zero-Knowledge proof for the submitter that the miner has a way to predict $y$ from $x$ with some deterministic accuracy);
+        \item the submitter computes the accuracy $a^{(i)}$ of the model of each miner $i$ by comparing their estimates $\hat{\mathcal Y}_{\text{test}}^{(i)}$ with the real test dataset $\mathcal Y_{\text{test}}$.
     \end{enumerate}
     \item ``Awarding phase'', in which:
     \begin{enumerate}
         \item the submitter ranks miners by their accuracy;
-        \item the submitter sends a signed message to the miner with most accuracy certifying it as the winner of the round;
-        \item the submitter sends the hash of the model and the estimate $\hat{\mathcal Y}_{\text{test}}$ of the winner to all the miners;
-        \item the winner is then allowed to build a block in which he will have to include the signed certificate of the submitter and the model $\{f,W\}$;
+        \item the submitter sends a signed message to the miner with the most accuracy (denoted $w$) certifying it as the winner of the round;
+        \item the submitter sends the hash $h^{(w)}$ of the model and the estimate $\hat{\mathcal Y}_{\text{test}}^{(w)}$ of the winner to all the miners;
+        \item the winner is then allowed to build a block in which he will include the signed certificate of the submitter and the model $\{f,W\}^{(w)}$;
         \item the block is broadcasted to all other miners;
         \item miners verify the block by checking that:
         \begin{enumerate}
             \item it includes the certificate of the submitter of the round,
-            \item the hash of the published model $\{f,W\}$ corresponds with the hash the winner committed to during the training phase,
-            \item and that the published model $\{f,W\}$ indeed maps $\mathcal X_\text{test}$ to the estimate $\hat{\mathcal Y}_{\text{test}}$ to which the winner committed to during the evaluation phase.
+            \item the hash of the published model $\{f,W\}^{(w)}$ corresponds with the hash $h^{(w)}$ the winner committed to during the training phase,
+            \item and that the published model $\{f,W\}^{(w)}$ indeed maps $\mathcal X_\text{test}$ to the estimate $\hat{\mathcal Y}_{\text{test}}^{(w)}$ to which the winner committed to during the evaluation phase.
         \end{enumerate}
-        If the published model does not correspond with the hash or is not the model that the winner used to compute $\hat{\mathcal Y}_{\text{test}}$, honest nodes won't add the block to their histories and will notify the misconduct to the submitter that will choose the next model with best accuracy and will start again from step 3b.
+        If the published model does not correspond with the hash or is not the model that the winner used to compute $\hat{\mathcal Y}_{\text{test}}^{(w)}$, honest nodes will not add the block to their local histories and will notify the misconduct to the submitter that will choose the next model with best accuracy and will start again from step 3b.
         
         If the model is correctly published, honest nodes add the block to their local history and a new round starts.
     \end{enumerate}
@@ -178,24 +180,42 @@ The protocol runs for sequential rounds at the end of which all honest nodes sho
 
 This protocol certainly works assuming honest behavior from all players and is designed to be resistant to some attacks. Nonetheless, by now, it is just designed for testing purposes.
 
-With the definition above, the protocol does not force submitters to pay a fee or provide a reward. By now, we will assume it is not necessary and test the assumption in the experiment in the following section.
+With the definition above, the protocol does not force submitters to pay a fee or provide a reward. Even if we already proved that it was necessary, we will assume it is not and test the assumption with an experiment in the following section.
+
+Future work could include studying the correctness and security of this protocol if submitters were required to provide rewards, and comparing it with previously proposed protocols.
 
 \subsection{Experiment in Python}
 After implementing the aforementioned protocol, we simulate a network of nodes running the protocol where one of them is Byzantine and executes the attack discussed before: performing the submitter and miner roles simultaneously and submitting pre-solved problems to the pool in order to gain the newly-minted rewards with higher probability than the honest nodes.
 
+The simulation code can be found in GitHub: \url{https://github.com/SergiHernandez/DecentralizedAI}
 
+If all nodes are honest, we see that the share of rewards after ... rounds is equal. 
+
+\begin{figure}[htbp]
+\centerline{\includegraphics{fig1.png}}
+\caption{Example of a figure caption.}
+\label{fig}
+\end{figure}
+
+With one Byzantine node submitting pre-solved problems, we see that the dishonest player earns more rewards than the rest.
+
+\begin{figure}[htbp]
+\centerline{\includegraphics{fig1.png}}
+\caption{Example of a figure caption.}
+\label{fig}
+\end{figure}
 
 So, from the proof sketch and the experiment, we conclude that without rewards and/or fees provided by the submitters, miners can manipulate their probability of mining a block and thus win the reward.
 
 \section{Implementing decentralized AI in smart contracts}
 
-Having seen that it is impossible to have such a decentralized AI solution implemented in the consensus protocol of the Blockchain, we ask ourselves if it would be feasible to have it implemented in smart contracts.
+Having seen that it is impossible to have such a decentralized AI solution implemented in the consensus protocol of a Blockchain, we ask ourselves if it would be feasible to have it implemented in smart contracts.
 
 \subsection{Previous work}
 
 \begin{itemize}
 \item Galaxy Learning (2019)\cite{} is the first attempt known to us to decentralize data storage and AI model training at the same time. They also propose incentives to data providers as a way for individuals to leverage their power against companies or institutions that regularly make use of their data. For the training mechanism, they base it on the concept of federated learning.
-\item The Microsoft's SUM project (2019)\cite{} also proposes a smart-contract-based framework for sharing and improving machine learning models. They define a way to incentivize users to provide more training data and punish wrong data submissions at the same time.
+\item The Microsoft's SUM project (2019)\cite{} also proposes a smart-contract-based framework for sharing and improving machine learning models. They define a way to incentivize users to provide more training data and punish wrong data submissions.
 \item In Incentivized Decentralized Machine Learning (2023)\cite{} and BRAIN (2023)\cite{}, the training is done by trainers off-chain and they then propose updates using a commit-reveal mechanism. The smart contract then scores and rewards the updates that are most optimal.
 \end{itemize}
 
@@ -205,12 +225,29 @@ We wanted to test how expensive it would be to train a simple model like a linea
 
 We store the training data in the smart contract in two arrays $x$ and $y$, and implement a function ``train()'' that runs stochastic gradient descent to update the values of the parameters $w_0$ and $w_1$.
 
-The code can be found in GitHub: \url{https://github.com/SergiHernandez/DecentralizedAI}
+The smart contract code can be found in GitHub: \url{https://github.com/SergiHernandez/DecentralizedAI}
 
 \subsection{Gas cost analysis}
 
-\section{Conclusions}
 
+\begin{table}[htbp]
+\caption{Table Type Styles}
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Table}&\multicolumn{3}{|c|}{\textbf{Table Column Head}} \\
+\cline{2-4} 
+\textbf{Head} & \textbf{\textit{Table column subhead}}& \textbf{\textit{Subhead}}& \textbf{\textit{Subhead}} \\
+\hline
+copy& More table copy$^{\mathrm{a}}$& &  \\
+\hline
+\multicolumn{4}{l}{$^{\mathrm{a}}$Sample of a Table footnote.}
+\end{tabular}
+\label{tab1}
+\end{center}
+\end{table}
+
+\section{Conclusions}
 
 We have seen that it is impossible to have a decentralized deep learning system with the properties we suggest implemented in the consensus protocol of the blockchain. We have also seen that the gas costs of implementing a deep learning training algorithm in a smart contract would be incredibly economically high.
 
@@ -255,3 +292,4 @@ https://doi.org/10.48550/arXiv.2007.15145.
 https://doi.org/10.48550/arXiv.2211.06669.
 
 \end{thebibliography}
+\end{document}
